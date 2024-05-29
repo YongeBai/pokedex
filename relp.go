@@ -11,7 +11,9 @@ import (
 func startRepl() {
 	scanner := bufio.NewScanner(os.Stdin)
 	commands := getCommands()
-	for scanner.Scan(){		
+	for {		
+		fmt.Print(">")
+		scanner.Scan()
 		input := scanner.Text()
 		inputFields := cleanInput(input)
 		if len(inputFields) == 0 {
