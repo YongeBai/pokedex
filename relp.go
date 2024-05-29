@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func startRepl() {
+func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	commands := getCommands()
 	for {		
@@ -20,7 +20,7 @@ func startRepl() {
 			continue
 		}
 		cmd := inputFields[0]
-		err := handleInput(cmd, commands)
+		err := handleInput(cmd, commands, cfg)
 		if err != nil {
 			fmt.Println(err.Error())
 		}
@@ -34,10 +34,10 @@ func cleanInput(input string) []string {
 }
 
 
-func handleInput(input string, commadsMap map[string]cliCommand) error {
+func handleInput(input string, commadsMap map[string]cliCommand, cfg *config) error {
 	command, ok := commadsMap[input]
 	if ok {
-		return command.callback()
+		return command.callback(cfg)
 	} else {
 		return errors.New("Command not found")
 	}
@@ -46,7 +46,7 @@ func handleInput(input string, commadsMap map[string]cliCommand) error {
 type cliCommand struct {
 	name string
 	description string
-	callback func() error
+	callback func(*config) error
 }
 
 func getCommands() map[string]cliCommand {
@@ -66,11 +66,11 @@ func getCommands() map[string]cliCommand {
 			description: "List next 20 locations",
 			callback: commandMap,
 		},
-		// "mapb": {
-		// 	name: "mapb",
-		// 	description: "List previous 20 locations",
-		// 	callback: commandMapBack,
-		// },
+		"mapb": {
+			name: "mapb",
+			description: "List previous 20 locations",
+			callback: commandMapBack,
+		},
 	}
 }
 

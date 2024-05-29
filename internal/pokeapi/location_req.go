@@ -7,16 +7,18 @@ import (
 	"net/http"
 )
 
-func (c *Client) GetLocations() (LocationResponse, error) {
-	url := baseURL + "/location"
+func (c *Client) GetLocations(pageURL *string) (LocationResponse, error) {
 	var locationResult LocationResponse
-	
+	url := baseURL + "/location"
+	if pageURL != nil {
+		url = *pageURL
+	}
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {		
 		return locationResult, fmt.Errorf("unable to get response: %w", err)
 	}	
 	
-	resp, err := c.httpClient.Do(req)
+	resp, _ := c.httpClient.Do(req)
 
 	if resp.StatusCode > 399 {		
 		return locationResult, fmt.Errorf("bad status code: %v", resp.StatusCode)
