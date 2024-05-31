@@ -5,7 +5,7 @@ import (
 )
 
 
-func commandMap(cfg *config) error {
+func commandMap(cfg *config, args []string) error {
 	pokeapiClient := cfg.pokeapiClient
 	resp, err := pokeapiClient.GetLocations(cfg.nextURL)
 	if err != nil {

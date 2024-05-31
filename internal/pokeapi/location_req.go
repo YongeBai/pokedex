@@ -10,7 +10,7 @@ import (
 
 func (c *Client) GetLocations(pageURL *string) (LocationResponse, error) {
 	var locationResult LocationResponse
-	url := baseURL+"/location?offset=0&limit=20"
+	url := baseURL+"/location-area?offset=0&limit=20"
 	if pageURL != nil {
 		url = *pageURL
 	}
@@ -50,3 +50,4 @@ func (c *Client) GetLocations(pageURL *string) (LocationResponse, error) {
 	}
 	return locationResult, nil
 }
+

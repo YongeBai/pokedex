@@ -5,7 +5,7 @@ import (
 )
 
 
-func commandMapBack(cfg *config) error {
+func commandMapBack(cfg *config, args []string) error {
 	if cfg.prevURL == nil {
 		return fmt.Errorf("no previous locations")
 	}

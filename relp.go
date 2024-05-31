@@ -12,18 +12,27 @@ func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	commands := getCommands()
 	for {		
-		fmt.Print(">")
+		fmt.Print("Pokedex >")
 		scanner.Scan()
 		input := scanner.Text()
 		inputFields := cleanInput(input)
 		if len(inputFields) == 0 {
 			continue
 		}
-		cmd := inputFields[0]
-		err := handleInput(cmd, commands, cfg)
+		err := handleInput(inputFields, commands, cfg)
 		if err != nil {
 			fmt.Println(err.Error())
 		}
+	}
+}
+
+
+func handleInput(args []string, commadsMap map[string]cliCommand, cfg *config) error {
+	command, ok := commadsMap[args[0]]
+	if ok {
+		return command.callback(cfg, args[1:])
+	} else {
+		return errors.New("Command not found")
 	}
 }
 
@@ -33,20 +42,10 @@ func cleanInput(input string) []string {
 	return strings.Fields(res)
 }
 
-
-func handleInput(input string, commadsMap map[string]cliCommand, cfg *config) error {
-	command, ok := commadsMap[input]
-	if ok {
-		return command.callback(cfg)
-	} else {
-		return errors.New("Command not found")
-	}
-}
-
 type cliCommand struct {
 	name string
 	description string
-	callback func(*config) error
+	callback func(*config, []string) error
 }
 
 func getCommands() map[string]cliCommand {
@@ -70,6 +69,11 @@ func getCommands() map[string]cliCommand {
 			name: "mapb",
 			description: "List previous 20 locations",
 			callback: commandMapBack,
+		},
+		"explore": {
+			name: "explore",
+			description: "Explore pokemon in location area",
+			callback: commandExplore,
 		},
 	}
 }
