@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 )
 
 
@@ -13,9 +12,9 @@ func commandMapBack(cfg *config) error {
 	pokeapiClient := cfg.pokeapiClient	
 	resp, err := pokeapiClient.GetLocations(cfg.prevURL)
 	if err != nil {
-		log.Fatal(err)
+		return fmt.Errorf("failed to get previous locations: %w", err)
 	}
-	fmt.Println("Previous Location Areas:\n")
+	fmt.Println("Previous Location Areas:")
 	for _, result := range resp.Results {
 		fmt.Printf("- %s\n", result.Name)
 	}

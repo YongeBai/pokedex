@@ -1,6 +1,11 @@
 package main
 
-import "github.com/yongebai/pokedex/internal/pokeapi"
+import (
+	// "fmt"
+	"time"
+
+	"github.com/yongebai/pokedex/internal/pokeapi"
+)
 
 type config struct {
 	pokeapiClient pokeapi.Client
@@ -9,8 +14,10 @@ type config struct {
 }
 
 func main() {
+	interval := time.Minute * 1
 	cfg := config {
-		pokeapiClient: pokeapi.NewClient(),		
+		pokeapiClient: pokeapi.NewClient(interval),		
 	}
 	startRepl(&cfg)
 }
+
