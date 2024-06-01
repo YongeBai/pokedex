@@ -17,7 +17,7 @@ func (c *Client) ExploreLocationArea(area string) (LocationAreaResponse, error) 
 	url := baseURL+"/location-area/"+area
 	
 	if body, ok := c.cache.Get(url); ok {
-		fmt.Println("Cache hit")
+		// fmt.Println("Cache hit")
 		if err := json.Unmarshal(body, &resultLocationArea); err != nil {
 			return resultLocationArea, fmt.Errorf("could not unmarshal json %w", err)
 		}
@@ -43,7 +43,7 @@ func (c *Client) ExploreLocationArea(area string) (LocationAreaResponse, error) 
 	}
 
 	time.Sleep(time.Second * 2)
-	fmt.Println("Cache miss")
+	// fmt.Println("Cache miss")
 	c.cache.Add(url, body)
 
 	if err := json.Unmarshal(body, &resultLocationArea); err != nil {		

@@ -11,6 +11,7 @@ type config struct {
 	pokeapiClient pokeapi.Client
 	nextURL *string
 	prevURL *string
+	pokedex map[string]Pokemon
 }
 
 func main() {

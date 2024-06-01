@@ -16,7 +16,7 @@ func (c *Client) GetLocations(pageURL *string) (LocationResponse, error) {
 	}
 
 	if body, ok := c.cache.Get(url); ok {
-		fmt.Println("Cache hit")
+		// fmt.Println("Cache hit")
 		if err := json.Unmarshal(body, &locationResult); err != nil {
 			return locationResult, fmt.Errorf("could not unmarshal json %w", err)
 		}
@@ -42,7 +42,7 @@ func (c *Client) GetLocations(pageURL *string) (LocationResponse, error) {
 	}
 
 	time.Sleep(time.Second * 2)
-	fmt.Println("Cache miss")
+	// fmt.Println("Cache miss")
 	c.cache.Add(url, body)
 
 	if err := json.Unmarshal(body, &locationResult); err != nil {		
