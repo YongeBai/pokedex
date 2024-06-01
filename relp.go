@@ -32,7 +32,7 @@ func handleInput(args []string, commadsMap map[string]cliCommand, cfg *config) e
 	if ok {
 		return command.callback(cfg, args[1:])
 	} else {
-		return errors.New("Command not found")
+		return errors.New("command not found")
 	}
 }
 
@@ -74,6 +74,21 @@ func getCommands() map[string]cliCommand {
 			name: "explore",
 			description: "Explore pokemon in location area",
 			callback: commandExplore,
+		},
+		"catch": {
+			name: "catch",
+			description: "Attempt to catch a pokemon",
+			callback: commandCatch,
+		},
+		"inspect": {
+			name: "inspect",
+			description: "Inspect a pokemon",
+			callback: commandInspect,
+		},
+		"pokedex": {
+			name: "pokedex",
+			description: "List all pokemon in pokedex",
+			callback: commandPokedex,
 		},
 	}
 }

@@ -17,7 +17,8 @@ type config struct {
 func main() {
 	interval := time.Minute * 1
 	cfg := config {
-		pokeapiClient: pokeapi.NewClient(interval),		
+		pokeapiClient: pokeapi.NewClient(interval),
+		pokedex: make(map[string]Pokemon),		
 	}
 	startRepl(&cfg)
 }

@@ -5,8 +5,8 @@ import (
 	"math/rand"
 )
 
-func commandCatch(cfs *config, args []string) error {
-	pokeapiClient := cfs.pokeapiClient
+func commandCatch(cfg *config, args []string) error {
+	pokeapiClient := cfg.pokeapiClient
 	resp, err := pokeapiClient.GetPokemon(args[0])
 	if err != nil {
 		return err
@@ -14,7 +14,7 @@ func commandCatch(cfs *config, args []string) error {
 	fmt.Printf("Throwing Pokeball at %s...\n", args[0])
 	if attemptCatch(args[0], resp.BaseExperience) {
 		fmt.Printf("Caught %s!\n", args[0])
-		cfs.pokedex[args[0]] = Pokemon{
+		cfg.pokedex[args[0]] = Pokemon{
 			Name: args[0],
 			Height: resp.Height,
 			Weight: resp.Weight,
@@ -28,7 +28,7 @@ func commandCatch(cfs *config, args []string) error {
 }
 
 func attemptCatch(pokemonName string, baseExperience int) bool {
-	chanceAtCatch := 1000 - baseExperience
+	chanceAtCatch := 800 - baseExperience
 	randomNumber := rand.Intn(1000)
 	return randomNumber < chanceAtCatch
 }
