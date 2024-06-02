@@ -3,6 +3,9 @@ package main
 import "fmt"
 
 func commandInspect(cfg *config, args []string) error {
+	if len(args) == 0 { 
+		return fmt.Errorf("missing pokemon name")
+	}
 	pokemon, ok := cfg.pokedex[args[0]]
 	if !ok {
 		return fmt.Errorf("pokemon %s not found in pokedex", args[0])

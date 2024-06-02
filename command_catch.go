@@ -6,6 +6,9 @@ import (
 )
 
 func commandCatch(cfg *config, args []string) error {
+	if len(args) == 0 { 
+		return fmt.Errorf("missing pokemon name")
+	}
 	pokeapiClient := cfg.pokeapiClient
 	resp, err := pokeapiClient.GetPokemon(args[0])
 	if err != nil {

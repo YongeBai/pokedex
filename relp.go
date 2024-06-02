@@ -15,6 +15,7 @@ func startRepl(cfg *config) {
 		fmt.Print("Pokedex >")
 		scanner.Scan()
 		input := scanner.Text()
+
 		inputFields := cleanInput(input)
 		if len(inputFields) == 0 {
 			continue
@@ -71,16 +72,16 @@ func getCommands() map[string]cliCommand {
 			callback: commandMapBack,
 		},
 		"explore": {
-			name: "explore",
+			name: "explore {location-area}",
 			description: "Explore pokemon in location area",
 			callback: commandExplore,
 		},
 		"catch": {
-			name: "catch",
+			name: "catch {pokemon}",
 			description: "Attempt to catch a pokemon",
 			callback: commandCatch,
 		},
-		"inspect": {
+		"inspect {pokemon}": {
 			name: "inspect",
 			description: "Inspect a pokemon",
 			callback: commandInspect,

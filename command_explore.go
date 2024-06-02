@@ -3,6 +3,9 @@ package main
 import "fmt"
 
 func commandExplore(cfg *config, args []string) error{
+	if len(args) == 0 { 
+		return fmt.Errorf("missing location name")
+	}
 	pokeapiClient := cfg.pokeapiClient
 	resp, err := pokeapiClient.ExploreLocationArea(args[0])
 	if err != nil {
