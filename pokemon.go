@@ -4,6 +4,7 @@ package main
 type Pokemon struct {
 	Name          string `json:"name"`
 	Height    int `json:"height"`
+	Moves                  []string `json:"moves"`
 	Stats []struct {
 		BaseStat int `json:"base_stat"`
 		Effort   int `json:"effort"`

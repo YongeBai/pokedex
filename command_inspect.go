@@ -21,5 +21,9 @@ func commandInspect(cfg *config, args []string) error {
 	for _, t := range pokemon.Types {
 		fmt.Printf("- %s\n", t.Type.Name)
 	}
+	fmt.Println("Moves:")
+	for _, move := range pokemon.Moves {
+		fmt.Printf("- %s\n", move)
+	}
 	return nil
 }

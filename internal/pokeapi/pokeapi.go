@@ -47,13 +47,12 @@ type PokemonResponse struct {
 	Name          string `json:"name"`
 	BaseExperience int `json:"base_experience"`	
 	Height    int `json:"height"`
-	//could choose 4 random moves from the Moves array
-	// Moves                  []struct {
-	// 	Move struct {
-	// 		Name string `json:"name"`
-	// 		URL  string `json:"url"`
-	// 	} `json:"move"`		
-	// } `json:"moves"`
+	Moves                  []struct {
+		Move struct {
+			Name string `json:"name"`
+			URL  string `json:"url"`
+		} `json:"move"`		
+	} `json:"moves"`
 	Stats []struct {
 		BaseStat int `json:"base_stat"`
 		Effort   int `json:"effort"`
